@@ -1,0 +1,13 @@
+{
+    "Log": {
+        "Level": "Debug"
+    },
+    "Port": {
+        "SerialPort": "COM4",
+        "Type": "USB",
+        "Protocol": ""
+    },
+    "gRPCServer": {
+        "Address": "localhost:5050"
+    }
+}
