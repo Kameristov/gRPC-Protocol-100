@@ -27,15 +27,6 @@ func TestCmdBuildRequest(t *testing.T) {
 			res:   []byte{0xF8, 0x55, 0xCE, 0x05, 0x00, 0xA3, 0x00, 0x00, 0x00, 0x50, 0x4F, 0x8F},
 			err:   nil,
 		},
-
-		/*
-		   {
-		   			name:  "data len < 1",
-		   			input: []byte{},
-		   			res:   nil,
-		   			err:   fmt.Errorf("empty message"),
-		   		},
-		*/
 	}
 	for _, test := range tests {
 		test := test
