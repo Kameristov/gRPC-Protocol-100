@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package stream;
+
+ option go_package = "internal/stream";
+// protoc -I stream/ stream/stream.proto --go_out=stream --go-grpc_out=stream
+// protoc --go_out=. --go_opt=paths=source_relative  --go-grpc_out=. --go-grpc_opt=paths=source_relative     stream/stream.proto
+
+//=========================SCALES scaner
+service ApiCallerScale {
+  rpc ScalesMessageOutChannel(stream RequestScale) returns (stream ResponseScale) {}
+  rpc SetTare(Empty) returns (ResponseSetScale) {}
+  rpc SetTareValue(RequestTareValue) returns (ResponseSetScale) {}
+  rpc SetZero(Empty) returns (ResponseSetScale) {}
+  rpc GetInstantWeight(Empty) returns (ResponseInstantWeight) {}
+  rpc GetState(Empty) returns (ResponseScale) {}
+}
+
+message Empty {
+}
+// The response message
+message ResponseScale {
+  string error = 1;
+  string message = 2;
+  string type = 3;
+  string subtype = 4;
+}
+
+message RequestTareValue {
+  string message = 1;
+}
+
+message RequestScale {
+  string message = 1;
+  string type = 2;
+  string subtype = 3;
+}
+
+message ResponseSetScale {
+  string error = 1;
+}
+
+message ResponseInstantWeight {
+  string error = 1;
+  string message = 2;
+}
