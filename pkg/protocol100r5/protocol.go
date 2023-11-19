@@ -102,12 +102,12 @@ func PortCycle(p port.Porter, data []byte) ([]byte, error) {
 	if err != nil {
 		return []byte{}, fmt.Errorf("error building request: %v", err)
 	}
-
+	
 	response, err := p.Communicate(request)
 	if err != nil {
 		return []byte{}, fmt.Errorf("error port communication: %v", err)
 	}
-	fmt.Println("response", response)
+	
 	res, err := cmdParseResponse(response)
 	if err != nil {
 		return []byte{}, fmt.Errorf("error parse response: %v", err)

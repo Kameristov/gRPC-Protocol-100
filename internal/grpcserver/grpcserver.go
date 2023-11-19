@@ -42,17 +42,12 @@ func (s *Server) ScalesMessageOutChannel(st stream.ApiCallerScale_ScalesMessageO
 		stype := ""
 		ssubtype := ""
 		serror := "nil"
-		err= s.P.Send([]byte(in.Message))
-		if err != nil {
-			serror = "Error send: " + err.Error()
-		}
 
-		// Обработка
-		recv, err:= s.P.Recv()
-		if err != nil{
-			serror = "Error recv: " + err.Error()
+		recv, err := s.P.Communicate([]byte(in.Message))
+		if err != nil {
+			serror = "Error: " + err.Error()
 		} else {
-			smessage = fmt.Sprintf("% 02X",recv)
+			smessage = fmt.Sprintf("% 02X", recv)
 		}
 
 		out := &stream.ResponseScale{Message: smessage, Type: stype, Subtype: ssubtype, Error: serror}

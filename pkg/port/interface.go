@@ -24,6 +24,4 @@ type Porter interface {
 	Connecter
 	Disconnecter
 	Communicater
-	Sender
-	Recver
 }

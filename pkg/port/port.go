@@ -3,6 +3,7 @@ package port
 import (
 	"bytes"
 	"fmt"
+	"sync"
 	"time"
 
 	"go.bug.st/serial"
@@ -13,6 +14,7 @@ type Port struct {
 	protocol string
 	portName string
 	port     serial.Port
+	mtx sync.Mutex
 }
 
 func New(pName, pType, pProtocol string) Porter {
@@ -68,6 +70,8 @@ func (p *Port) Disconect() error {
 }
 
 func (p *Port) Communicate(data []byte) ([]byte, error) {
+	p.mtx.Lock()
+	defer p.mtx.Unlock()
 
 	err := p.Send(data)
 	if err != nil {
