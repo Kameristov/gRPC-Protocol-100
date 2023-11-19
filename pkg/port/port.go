@@ -58,10 +58,6 @@ func (p *Port) Conect() error {
 }
 
 func (p *Port) Disconect() error {
-	if p.port == nil {
-		return fmt.Errorf("port doesn't open")
-	}
-
 	err := p.port.Close()
 	if err != nil {
 		return fmt.Errorf("error closing port: %v", err)
@@ -99,11 +95,9 @@ func (p *Port) Recv() ([]byte, error) {
 	for {
 		n, err := p.port.Read(buff)
 		if err != nil {
-
 			break
 		}
 		if n == 0 {
-
 			break
 		}
 		b.Write(buff[:n])
